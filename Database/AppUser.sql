@@ -3,11 +3,7 @@
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
     [UserName] NVARCHAR(256) NOT NULL,
     [Email] NVARCHAR(256) NULL,
-    [EmailConfirmed] BIT NOT NULL,
     [PasswordHash] NVARCHAR(MAX) NULL,
-    [PhoneNumber] NVARCHAR(20) NULL,
-    [PhoneNumberConfirmed] BIT NOT NULL,
-    [TwoFactorEnabled] BIT NOT NULL
 )
 
 GO

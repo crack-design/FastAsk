@@ -26,11 +26,11 @@ namespace FastAsk.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(GenerateTokenModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
+                var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
                 if (result.Succeeded)
                 {
                     return new JsonResult("Logged in!");

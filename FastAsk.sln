@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastAsk", "FastAsk\FastAsk.csproj", "{8A8AF49A-30BA-4AF1-9F35-7351D5BCB4E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastAsk", "FastAsk\FastAsk.csproj", "{8A8AF49A-30BA-4AF1-9F35-7351D5BCB4E4}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{E13109CD-85BE-47DD-8E68-46F6AE0D9581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{2F209D09-7CAA-43EC-BF26-BAC854B1DFF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{E13109CD-85BE-47DD-8E68-46F6AE0D9581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E13109CD-85BE-47DD-8E68-46F6AE0D9581}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E13109CD-85BE-47DD-8E68-46F6AE0D9581}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2F209D09-7CAA-43EC-BF26-BAC854B1DFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F209D09-7CAA-43EC-BF26-BAC854B1DFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F209D09-7CAA-43EC-BF26-BAC854B1DFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F209D09-7CAA-43EC-BF26-BAC854B1DFF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
