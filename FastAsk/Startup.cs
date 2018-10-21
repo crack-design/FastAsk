@@ -45,11 +45,6 @@ namespace FastAsk
             services.AddSingleton<IPostConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer();
-
-            //services.AddAuthentication(a =>
-            //{
-            //    a.DefaultScheme = "MyScheme";
-            //}).AddCustomAuthentication("MyScheme", "This is my scheme", a => { });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

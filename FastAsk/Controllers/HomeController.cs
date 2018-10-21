@@ -13,7 +13,6 @@ namespace FastAsk.Controllers
     public class HomeController : Controller
     {
         // GET: /<controller>/
-        [Authorize]
         public IActionResult Index()
         {
             return new JsonResult("ABC");

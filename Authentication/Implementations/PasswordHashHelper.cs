@@ -8,20 +8,14 @@ namespace Authentication.Implementations
 {
     public static class PasswordHashHelper
     {
-        public static string HashPassword(string rawPassword)
+        public static string HashPassword(string password)
         {
-            //generating 128-bit salt
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
-
+            var salt = Encoding.ASCII.GetBytes("salt");
             return Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: rawPassword,
+                password: password,
                 salt: salt,
                 prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
+                iterationCount: 1000,
                 numBytesRequested: 256 / 8));
         }
     }
