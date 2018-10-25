@@ -23,7 +23,7 @@ namespace Authentication.Implementations
             using (var connection = new SqlConnection(this.connectionString))
             {
                 await connection.OpenAsync();
-                return await connection.QuerySingleAsync<UserViewModel>($@"SELECT * FROM [AppUser]
+                return await connection.QueryFirstOrDefaultAsync<UserViewModel>($@"SELECT * FROM [AppUser]
                             WHERE [Id] = @{nameof(id)}", new { id });
             }
         }
@@ -33,7 +33,7 @@ namespace Authentication.Implementations
             using (var connection = new SqlConnection(this.connectionString))
             {
                 await connection.OpenAsync();
-                return await connection.QuerySingleAsync<UserViewModel>($@"SELECT * FROM [AppUser]
+                return await connection.QueryFirstOrDefaultAsync<UserViewModel>($@"SELECT * FROM [AppUser]
                             WHERE [UserName] = @{nameof(userName)}", new { userName });
             }
         }
@@ -43,7 +43,7 @@ namespace Authentication.Implementations
             using (var connection = new SqlConnection(this.connectionString))
             {
                 await connection.OpenAsync();
-                return await connection.QuerySingleAsync<UserViewModel>($@"SELECT * FROM [AppUser]
+                return await connection.QueryFirstOrDefaultAsync<UserViewModel>($@"SELECT * FROM [AppUser]
                             WHERE [UserName] = @{nameof(username)} AND [PasswordHash] = @{nameof(hashedPassword)}", new { username, hashedPassword });
             }
         }
@@ -54,7 +54,7 @@ namespace Authentication.Implementations
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
-                model.Id = await connection.QuerySingleAsync<int>($@"INSERT INTO [AppUser] ([UserName],[Email],[PasswordHash])
+                model.Id = await connection.QueryFirstOrDefaultAsync<int>($@"INSERT INTO [AppUser] ([UserName],[Email],[PasswordHash])
                             VALUES (@{nameof(UserViewModel.UserName)}, @{nameof(UserViewModel.Email)}, @{nameof(UserViewModel.PasswordHash)});
                             SELECT CAST(SCOPE_IDENTITY() as int)", model);
             }

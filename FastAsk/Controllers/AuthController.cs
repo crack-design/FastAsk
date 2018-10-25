@@ -4,9 +4,11 @@ using FastAsk.Middleware.TokenGeneration;
 using FastAsk.Models.AccountModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace FastAsk.Controllers
 {
@@ -24,9 +26,10 @@ namespace FastAsk.Controllers
         }
 
         [HttpPost, Route("login")]
-        public IActionResult Login([FromBody]LoginModel user)
+        public async Task<string> Login([FromBody]LoginModel user)
         {
-            if (this.userManager.FindByUserNameAndPassword(user.UserName, PasswordHashHelper.HashPassword(user.Password)) != null)
+            var userData = await this.userManager.FindByUserNameAndPassword(user.UserName, PasswordHashHelper.HashPassword(user.Password));
+            if (userData != null)
             {
                 var token = new JwtSecurityToken(
                     issuer: jwtAuthentication.Value.ValidIssuer,
@@ -39,15 +42,18 @@ namespace FastAsk.Controllers
                     expires: DateTime.UtcNow.AddMinutes(60),
                     signingCredentials: jwtAuthentication.Value.SigningCredentials);
 
-                return Ok(new
+
+                var authorizationModel = new AuthorizationModel()
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token)
-                });
+                    authorizedUserModel = new AuthorizationModel.AuthorizedUserModel(userData.Id, userData.UserName, userData.Email)
+                };
+                authorizationModel.token = new JwtSecurityTokenHandler().WriteToken(token);
+                return JsonConvert.SerializeObject(authorizationModel, new JsonSerializerSettings { Formatting = Formatting.Indented });
             }
 
             else
             {
-                return BadRequest("Username or password is invalid");
+                return JsonConvert.SerializeObject(new AuthorizationModel { errorMessage = "Wrong user name or password"}, new JsonSerializerSettings { Formatting = Formatting.Indented });
             }
         }
     }

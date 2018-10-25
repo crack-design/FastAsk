@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoginViewModel } from 'src/app/viewmodels/login.viewmodel';
+import { AuthorizedUserInfoViewModel } from 'src/app/viewmodels/authorizeduser.viewmodel';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
 
@@ -17,7 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router) {
 
       this.form = this.formBuilder.group({
-        email: ['', Validators.required],
+        username: ['', Validators.required],
         password: ['', Validators.required]
       });
     }
@@ -25,12 +28,9 @@ export class LoginComponent implements OnInit {
     login() {
       const val = this.form.value;
 
-      if (val.email && val.password) {
-        this.authService.login(val.email, val.password)
-        .subscribe(() => {
-          console.log('User is logged in');
-        }
-      );
+      if (val.username && val.password) {
+        this.authService.login(new LoginViewModel(val.username, val.password))
+        .subscribe();
       }
     }
 
