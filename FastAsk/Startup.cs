@@ -45,6 +45,7 @@ namespace FastAsk
             services.AddSingleton<IPostConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +56,10 @@ namespace FastAsk
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(a =>
+                a.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin());
 
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();

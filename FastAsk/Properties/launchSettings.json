@@ -17,11 +17,10 @@
     },
     "FastAsk": {
       "commandName": "Project",
-      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:4442/"
+      "applicationUrl": "http://localhost:4442"
     }
   }
 }

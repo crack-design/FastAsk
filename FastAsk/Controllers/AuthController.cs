@@ -28,7 +28,7 @@ namespace FastAsk.Controllers
         [HttpPost, Route("login")]
         public async Task<string> Login([FromBody]LoginModel user)
         {
-            var userData = await this.userManager.FindByUserNameAndPassword(user.UserName, PasswordHashHelper.HashPassword(user.Password));
+            var userData = await this.userManager.FindByUserNameAndPassword(user.Login, PasswordHashHelper.HashPassword(user.Password));
             if (userData != null)
             {
                 var token = new JwtSecurityToken(
@@ -36,7 +36,7 @@ namespace FastAsk.Controllers
                     audience: jwtAuthentication.Value.ValidAudience,
                     claims: new[]
                     {
-                        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Sub, user.Login),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                     },
                     expires: DateTime.UtcNow.AddMinutes(60),

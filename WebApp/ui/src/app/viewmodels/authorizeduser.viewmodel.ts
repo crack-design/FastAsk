@@ -1,6 +1,6 @@
 export class AuthorizedUserInfoViewModel {
   public userModel: AuthorizedUserModel;
-  public access_token: string;
+  public token: string;
   public errorMessage: string;
 }
 

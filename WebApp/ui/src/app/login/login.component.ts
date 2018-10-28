@@ -12,7 +12,7 @@ import { AuthorizedUserInfoViewModel } from 'src/app/viewmodels/authorizeduser.v
   providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
-
+  private isLoggedIn: boolean;
   form: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
@@ -34,7 +34,12 @@ export class LoginComponent implements OnInit {
       }
     }
 
+    logout() {
+      this.authService.logout();
+    }
+
   ngOnInit() {
+    this.isLoggedIn = localStorage.getItem('currentUser') !== null;
   }
 
 }
